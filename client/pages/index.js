@@ -3,15 +3,59 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import PlacesInf from "../src/data/Places";
+import axios from "axios";
+
+const URL_AUTHENTICATION = "http://localhost:8000/auth/authenticate";
 
 export default function Home() {
-  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const submitForm = (e) => {
+  const [userData, setUserData] = useState("");
+  const [tokenVerification, setTokenVerification] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("token") !== null) {
+      verifyToken(JSON.parse(localStorage.getItem("token")));
+    }
+    if (localStorage.getItem("data") !== null) {
+      setUserData(JSON.parse(localStorage.getItem("data")));
+    }
+  }, [tokenVerification]);
+
+  const submitForm = async (e) => {
     e.preventDefault();
-    console.log(email);
+
+    axios
+      .post(`${URL_AUTHENTICATION}`, {
+        email: email,
+        password: password,
+      })
+      .then(function (response) {
+        if (response.data.error === "User not found")
+          return console.log("usuario nao encontrado");
+        if (response.data.error === "Invalid Password")
+          return console.log("senha incorreta");
+
+        localStorage.setItem("data", JSON.stringify(response.data.user));
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+        setUserData(response.data.user);
+        verifyToken(response.data.token);
+      })
+      .catch(function (error) {});
+  };
+
+  const verifyToken = async (response) => {
+    axios
+      .get("http://localhost:8000/auth/projects", {
+        headers: {
+          Authorization: `Bearer ${response}`,
+        },
+      })
+      .then((res) => {
+        setTokenVerification(res.data.ok);
+      })
+      .catch((error) => {});
   };
 
   return (
@@ -24,13 +68,28 @@ export default function Home() {
 
       <div>TEST</div>
 
-      <form>
-        {/* <input type="text" placeholder="Nome"></input> */}
-        <input type="text" placeholder="Email" onChange={(e)=>setEmail(e.target.value)}></input>
-        <input type="text" placeholder="Senha" onChange={(e)=>setPassword(e.target.value)}></input>
-        {/* <input type="file" placeholder="Foto"></input> */}
-        <input type="submit" onClick={(e) => submitForm(e)}></input>
-      </form>
+      {tokenVerification === false ? (
+        <>
+          <form>
+            <input
+              type="text"
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+            ></input>
+            <input
+              type="text"
+              placeholder="Senha"
+              onChange={(e) => setPassword(e.target.value)}
+            ></input>
+            <input type="submit" onClick={(e) => submitForm(e)}></input>
+            <a href="/signup">Criar uma Conta</a>
+          </form>
+        </>
+      ) : (
+        <>
+          <h1>{`Olá ${userData.name}`}</h1>
+        </>
+      )}
 
       <div className={styles.a}>INF DE TDS USERS</div>
       <PlacesInf></PlacesInf>

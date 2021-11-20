@@ -6,7 +6,7 @@ const registerUser = async (req, res) => {
 
   try {
     if (await User.findOne({ email }))
-      return res.status(400).send({ error: "Usuario já cadastrado" });
+      return res.status(200).send({ error: "Usuario já cadastrado" });
 
     const user = await User.create(req.body);
 

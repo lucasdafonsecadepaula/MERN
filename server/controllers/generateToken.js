@@ -5,5 +5,4 @@ function generateToken(params = {}) {
     expiresIn: 86400,
   });
 }
-
 module.exports = generateToken;

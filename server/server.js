@@ -7,6 +7,7 @@ const io = require("socket.io");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
+const getPlaces = require("./routes/getPlaces")
 const postRoutes = require("./routes/posts");
 
 //DEFINDO A PORTA
@@ -28,7 +29,8 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 //POST
-app.use("/auth", postRoutes);
+app.use("/places", getPlaces);
+app.use("/", postRoutes);
 
 mongoose
   .connect(DB_CONNECTION_URL, {

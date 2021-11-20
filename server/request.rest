@@ -1,4 +1,4 @@
-GET http://localhost:8000/
+GET http://localhost:8000/places
 
 ################################
 
@@ -6,8 +6,8 @@ POST http://localhost:8000/auth/register
 Content-Type: application/json
 
 {
-    "name": "Lucas222",
-    "email": "3622222",
+    "name": "Lucas2221111",
+    "email": "3622222222",
     "password": "123"
 }
 
@@ -22,4 +22,4 @@ Content-Type: application/json
 
 ################################################################
 GET http://localhost:8000/auth/projects
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTA0YWIzNDczMDA0ODg4M2JjOTVmYiIsImlhdCI6MTYzNjg0NjYxMSwiZXhwIjoxNjM2OTMzMDExfQ.vJEe6v4nFRmrVdFThQShIXsSBTLWM8xeYoQGBOTjPf0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTdhNzdkMzI0N2M4MDU4ZGVmY2UxMSIsImlhdCI6MTYzNzMzMzE5OSwiZXhwIjoxNjM3NDE5NTk5fQ.77GcByoDSSp7cyIxqi5VKazMEuTyV7iKClCUsth3L9k
