@@ -1,13 +1,19 @@
 import react, { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
+
 
 export default function SignUpPage() {
+  const router = useRouter();
   const [nome, setNome] = useState();
   const [email, setEmail] = useState();
   const [senha, setSenha] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(nome == undefined)return;
+    if(email == undefined)return;
+    if(senha == undefined)return;
 
     axios
       .post(`http://localhost:8000/auth/register`, {
@@ -19,7 +25,9 @@ export default function SignUpPage() {
         if (response.data.error === "Usuario já cadastrado")
           return console.log("Usuario já cadastrado");
 
-        console.log(response);
+        localStorage.setItem("data", JSON.stringify(response.data.user));
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+        router.push("/")
       })
       .catch(function (error) {});
   };

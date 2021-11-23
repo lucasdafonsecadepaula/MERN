@@ -6,9 +6,9 @@ POST http://localhost:8000/auth/register
 Content-Type: application/json
 
 {
-    "name": "Lucas2221111",
-    "email": "3622222222",
-    "password": "123"
+    "name": "5",
+    "email": "5",
+    "password": "5"
 }
 
 ################################################################
@@ -16,8 +16,8 @@ POST http://localhost:8000/auth/authenticate
 Content-Type: application/json
 
 {
-    "email": "3622222",
-    "password": "123"
+    "email": "1",
+    "password": "1"
 }
 
 ################################################################
