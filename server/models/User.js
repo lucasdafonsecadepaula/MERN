@@ -6,6 +6,7 @@ const UserSchema = mongoose.Schema({
   name: { type: String, require: true },
   email: { type: String, require: true, unique: true, lowercase: true },
   password: { type: String, require: true, select: false },
+  passwordResetToken: {type: String, select: false},
   createdAt: { type: Date, default: Date.now },
   friends: {type: Array, require: false, default: []},
   friendsData: {type: Object, require: false, default: {}}

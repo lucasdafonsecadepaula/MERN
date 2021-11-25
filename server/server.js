@@ -7,8 +7,8 @@ const io = require("socket.io");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const getPlaces = require("./routes/getPlaces")
-const postRoutes = require("./routes/posts");
+const getPlaces = require("./routes/getPlaces");
+const authRoutes = require("./routes/authRoutes");
 
 //DEFINDO A PORTA
 const PORT = process.env.PORT || 8000;
@@ -30,7 +30,7 @@ app.use(cors());
 
 //POST
 app.use("/places", getPlaces);
-app.use("/", postRoutes);
+app.use("/auth", authRoutes);
 
 mongoose
   .connect(DB_CONNECTION_URL, {
@@ -41,6 +41,3 @@ mongoose
     app.listen(PORT, () => {});
   })
   .catch((err) => console.log(err));
-
-
- 

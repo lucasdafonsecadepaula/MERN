@@ -5,7 +5,8 @@ import styles from "../styles/Home.module.css";
 import PlacesInf from "../src/data/Places";
 import axios from "axios";
 
-const URL_AUTHENTICATION = "http://localhost:8000/auth/authenticate";
+const URL_SIGNIN = "http://localhost:8000/auth/signin";
+const URL_TOKENVERIFY = "http://localhost:8000/auth/verifytoken";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -27,7 +28,7 @@ export default function Home() {
     e.preventDefault();
 
     axios
-      .post(`${URL_AUTHENTICATION}`, {
+      .post(`${URL_SIGNIN}`, {
         email: email,
         password: password,
       })
@@ -47,7 +48,7 @@ export default function Home() {
 
   const verifyToken = async (response) => {
     axios
-      .get("http://localhost:8000/auth/projects", {
+      .get(`${URL_TOKENVERIFY}`, {
         headers: {
           Authorization: `Bearer ${response}`,
         },

@@ -3,9 +3,9 @@ const Place = require("../models/Place");
 
 const getPosts = async (req, res) => {
   try {
-    const users = await Place.find();
+    const places = await Place.find();
 
-    res.status(200).json(users);
+    res.status(200).json(places);
   } catch (err) {}
 };
 

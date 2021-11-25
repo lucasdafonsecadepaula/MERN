@@ -6,13 +6,13 @@ POST http://localhost:8000/auth/register
 Content-Type: application/json
 
 {
-    "name": "5",
-    "email": "5",
-    "password": "5"
+    "name": "7",
+    "email": "8",
+    "password": "7"
 }
 
 ################################################################
-POST http://localhost:8000/auth/authenticate
+POST http://localhost:8000/auth/signin
 Content-Type: application/json
 
 {
@@ -21,5 +21,22 @@ Content-Type: application/json
 }
 
 ################################################################
-GET http://localhost:8000/auth/projects
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTdhNzdkMzI0N2M4MDU4ZGVmY2UxMSIsImlhdCI6MTYzNzMzMzE5OSwiZXhwIjoxNjM3NDE5NTk5fQ.77GcByoDSSp7cyIxqi5VKazMEuTyV7iKClCUsth3L9k
+GET http://localhost:8000/auth/verifytoken
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTdjMjFlMzI0N2M4MDU4ZGVmY2VkNyIsImlhdCI6MTYzNzcxMTY3NSwiZXhwIjoxNjM3Nzk4MDc1fQ.aCgioCvI9YlkAKQTWTvpxgSbsEEBKwC0NEvyzXD4Tqw
+
+#########################################
+POST http://localhost:8000/auth/forgot_password
+Content-Type: application/json
+
+{
+    "email": "lucasdafonsecadepaula@gmail.com"
+}
+
+#########################################
+POST http://localhost:8000/auth/forgot_password_verify_token
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOWQ4OGU2MjUyNzFmNWM2NDMxNzYzOCIsImlhdCI6MTYzNzgwMTk2NSwiZXhwIjoxNjM3ODAyODY1fQ.Crz-vUt9sxtzd-8JV-0OA7hVPYGxqucjvnY2dA8cSlo",
+    "password": "555"
+}
