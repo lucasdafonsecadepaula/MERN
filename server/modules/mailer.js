@@ -1,19 +1,12 @@
-const CONFIG_MAILER = {
-  host: "smtp.gmail.com",
-  port: 587,
-  user: "vidadonthave@gmail.com",
-  pass: "13234335924862",
-};
-
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-  host: CONFIG_MAILER.host,
-  port: CONFIG_MAILER.port,
+  host: process.env.CONFIG_MAILER_HOST,
+  port: process.env.CONFIG_MAILER_PORT,
   secure: false,
   auth: { 
-      user: CONFIG_MAILER.user, 
-      pass: CONFIG_MAILER.pass 
+      user: process.env.CONFIG_MAILER_USER, 
+      pass: process.env.CONFIG_MAILER_PASS 
     },
   tls: {
     rejectUnauthorized: false,
